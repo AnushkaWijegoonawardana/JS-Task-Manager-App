@@ -36,7 +36,7 @@
       <div class="container">
         <a class="navbar-brand" href="index.html"
           >Taks Manager |
-          <small class="lead">Developed By Anushka Wijegoonawardana</small></a
+          <small class="lead">Organize your Tasks</small></a
         >
       </div>
     </nav>
@@ -52,7 +52,7 @@
           </h6>
           <form>
             <div class="row">
-              <div class="col">
+              <div class="col-md">
                 <div class="form-group">
                   <label for="taskNameInputField">Task Name</label>
                   <div class="input-group">
@@ -76,7 +76,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-md">
                 <div class="form-group">
                   <label for="dueDateInputField">Due Date</label>
                   <div class="input-group">
@@ -86,10 +86,9 @@
                       ></span>
                     </div>
                     <input
-                      type="text"
+                      type="date"
                       class="form-control"
                       id="dueDateInputField"
-                      placeholder="2020 - 02 - 02"
                     />
                     <div class="invalid-feedback">
                       Please choose a username.
@@ -102,7 +101,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col">
+              <div class="col-md">
                 <div class="form-group">
                   <label for="taskDescriptionInputField"
                     >Task Description</label
@@ -127,25 +126,25 @@
           <hr />
 
           <div class="row mb-2">
-            <div class="col">
-              <button class="btn btn-block btn-dark">
+            <div class="col-md">
+              <button class="btn btn-block btn-dark" id="addTaskBtn">
                 <i class="fas fa-plus"></i> Add New Task
               </button>
             </div>
           </div>
-          <div class="row mb-2">
-            <div class="col">
-              <button class="btn btn-block btn-primary">
+          <div class="row">
+            <div class="col-md mb-2">
+              <button class="btn btn-block btn-primary" id="updateTaskBtn">
                 <i class="fas fa-edit"></i> Update Task
               </button>
             </div>
-            <div class="col">
-              <button class="btn btn-block btn-danger">
+            <div class="col-md mb-2">
+              <button class="btn btn-block btn-danger" id="deleteTaskBtn">
                 <i class="fas fa-trash-alt"></i> Delete Task
               </button>
             </div>
-            <div class="col">
-              <button class="btn btn-block btn-success">
+            <div class="col-md mb-2">
+              <button class="btn btn-block btn-success" id="backBtn">
                 <i class="fas fa-hand-point-left"></i> Go Back
               </button>
             </div>
@@ -155,66 +154,133 @@
 
       <!-- Task Display Container -->
       <div class="row">
-        <div class="col-4">
+        <div class="col-md-4 mb-3">
           <ul class="list-group">
             <li
               class="list-group-item list-group-item-primary d-flex justify-content-between align-items-center"
             >
               Total Tasks
-              <span class="badge badge-primary badge-pill">10</span>
+              <span class="badge badge-primary badge-pill" id="totaltaskcount"
+                >10</span
+              >
             </li>
             <li
               class="list-group-item list-group-item-success d-flex justify-content-between align-items-center"
             >
               Completed Tasks
-              <span class="badge badge-success badge-pill">2</span>
+              <span
+                class="badge badge-success badge-pill"
+                id="completedtaskcount"
+                >2</span
+              >
             </li>
             <li
               class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center"
             >
               Over Dued Tasks
-              <span class="badge badge-warning badge-pill">5</span>
+              <span class="badge badge-warning badge-pill" id="overduetaskcount"
+                >5</span
+              >
             </li>
             <li
               class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center"
             >
               Deleted Tasks
-              <span class="badge badge-danger badge-pill">5</span>
+              <span class="badge badge-danger badge-pill" id="deletedtaskcount"
+                >5</span
+              >
             </li>
           </ul>
         </div>
-        <div class="col-8">
+        <div class="col-md-8">
           <div class="card ">
             <h6 class="card-header">Task List</h6>
             <div class="card-body">
-              <ul class="list-group mb-3">
+              <div class="card-title">Tasks In Progress</div>
+              <ul class="list-group mb-3" id="tasklistcontainer">
                 <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
+                  class="list-group-item list-group-item-light d-flex justify-content-between align-items-center"
+                  id="tasklistitem"
                 >
-                  <div><span class="font-weight-bold taskitemname">UI Design For HSC | </span><sapn class="taskitemduedate font-italic">2020-02-02</sapn></div>
-                  <a href="#" class="taskitemedit"><i class="fas fa-pencil-alt"></i></a>
+                  <a href="#" class="taskitemprogress col-1"
+                    ><i class="fas fa-square"></i
+                  ></a>
+                  <div class="text-left col-10">
+                    <span class="font-weight-bold taskitemname"
+                      >UI Design For HSC | </span
+                    ><sapn class="taskitemduedate font-italic">Due On 02/01/2020</sapn>
+                  </div>
+                  <a href="#" class="taskitemedit col-1"
+                    ><i class="fas fa-pencil-alt"></i
+                  ></a>
+                </li>
+                <li
+                  class="list-group-item list-group-item-primary d-flex justify-content-between align-items-center"
+                  id="tasklistitem"
+                >
+                  <a href="#" class="taskitemprogress col-1"
+                    ><i class="fas fa-square"></i
+                  ></a>
+                  <div class="text-left col-10">
+                    <span class="font-weight-bold taskitemname"
+                      >UI Design For HSC | </span
+                    ><sapn class="taskitemduedate font-italic">Due On 02/01/2020</sapn>
+                  </div>
+                  <a href="#" class="taskitemedit col-1"
+                    ><i class="fas fa-pencil-alt"></i
+                  ></a>
                 </li>
                 <li
                   class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center"
+                  id="tasklistitem"
                 >
-                  <div><span class="font-weight-bold taskitemname">UI Design For HSC | </span><sapn class="taskitemduedate font-italic">2020-02-02</sapn></div>
-                  <a href="#" class="taskitemedit"><i class="fas fa-pencil-alt"></i></a>
+                  <a href="#" class="taskitemprogress col-1"
+                    ><i class="fas fa-square"></i
+                  ></a>
+                  <div class="text-left col-10">
+                    <span class="font-weight-bold taskitemname"
+                      >UI Design For HSC | </span
+                    ><sapn class="taskitemduedate font-italic">Due On 02/01/2020</sapn>
+                  </div>
+                  <a href="#" class="taskitemedit col-1"
+                    ><i class="fas fa-pencil-alt"></i
+                  ></a>
                 </li>
                 <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
+                  class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center"
+                  id="tasklistitem"
                 >
-                  <div><span class="font-weight-bold taskitemname">UI Design For HSC | </span><sapn class="taskitemduedate font-italic">2020-02-02</sapn></div>
-                  <a href="#" class="taskitemedit"><i class="fas fa-pencil-alt"></i></a>
+                  <a href="#" class="taskitemprogress col-1"
+                    ><i class="fas fa-square"></i
+                  ></a>
+                  <div class="text-left col-10">
+                    <span class="font-weight-bold taskitemname"
+                      >UI Design For HSC | </span
+                    ><sapn class="taskitemduedate font-italic">Due On 02/01/2020</sapn>
+                  </div>
+                  <a href="#" class="taskitemedit col-1"
+                    ><i class="fas fa-pencil-alt"></i
+                  ></a>
                 </li>
+              </ul>
+              <div class="card-title">Completed Tasks</div>
+              <ul class="list-group mb-3" id="tasklistcontainer">
                 <li
-                  class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center"
+                  class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center"
+                  id="tasklistitem"
                 >
-                  <div><span class="font-weight-bold taskitemname">UI Design For HSC | </span><sapn class="taskitemduedate font-italic">2020-02-02</sapn></div>
-                  <a href="#" class="taskitemedit"><i class="fas fa-pencil-alt"></i></a>
+                  <div class="text-left">
+                    <strike><span class="font-weight-bold taskitemname"
+                      >UI Design For HSC | </span
+                    ><sapn class="taskcompleteddate font-italic">Completed On 02/01/2020</sapn></strike>
+                  </div>
                 </li>
               </ul>
 
-              <a href="#" class="btn btn-block btn-dark float-right"
+              <a
+                href="#"
+                class="btn btn-block btn-dark float-right"
+                id="clearAllBtn"
                 ><i class="fas fa-broom"></i> Clear All Tasks</a
               >
             </div>
@@ -222,6 +288,13 @@
         </div>
       </div>
     </div>
+
+    <!-- Footer Content -->
+    <footer class="bg-dark text-light py-3">
+      <div class="container text-center">
+        <p class="lead mb-0"><span class="font-weight-bold">Design & Developed By</span> <a href="#" class="link-text text-light font-italic">Anushka Wijegoonawardana</a></p>
+      </div>
+    </footer>
 
     <!-- Body Scripting Files -->
     <script src="app.js"></script>

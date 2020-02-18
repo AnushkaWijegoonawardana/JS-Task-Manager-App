@@ -10,3 +10,7 @@ small.lead {
 .modal-dialog {
   margin-top: 10rem;
 }
+
+a:hover {
+  text-decoration: none;
+}

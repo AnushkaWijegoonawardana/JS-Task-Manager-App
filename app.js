@@ -101,7 +101,6 @@ const UICtrl = (() => {
         htmlDom += `
         <li id="taskprogress-${taskitem.id}"
         class="list-group-item list-group-item-light d-flex justify-content-between align-items-center"
-        id="tasklistitem"
       >
         <a href="#" class="taskitemprogress col-1"
           ><i class="fas fa-square"></i
@@ -126,6 +125,38 @@ const UICtrl = (() => {
         duedate: UiSelectors.taskduedateinput.value,
         taskdetails: UiSelectors.taskdescriptioninput.value
       };
+    },
+    //Add New Inprogrss Task List To UI
+    addProgressTaskList: newTask => {
+      const tasklistuiitem = document.createElement("li");
+
+      tasklistuiitem.classList =
+        "list-group-item list-group-item-light d-flex justify-content-between align-items-center";
+
+      tasklistuiitem.id = `taskprogress-${newTask.id}`;
+
+      tasklistuiitem.innerHTML = `
+      <a href="#" class="taskitemprogress col-1"
+          ><i class="fas fa-square"></i
+        ></a>
+        <div class="text-left col-10">
+          <a href="#" class="font-weight-bold text-dark text-decoration-none taskitemname">${newTask.taskname}</a> | <sapn class="taskitemduedate font-italic">Due On ${newTask.duedate}</sapn>
+        </div>
+        <a href="#" class="taskitemedit col-1"
+          ><i class="fas fa-pencil-alt"></i
+        ></a>
+      `;
+
+      UiSelectors.inprogresstasklist.insertAdjacentElement(
+        "beforeEnd",
+        tasklistuiitem
+      );
+    },
+    // Clear UI Input Fileds
+    clearTaskInput: () => {
+      UiSelectors.tasknameinput.value = "";
+      UiSelectors.taskduedateinput.value = "";
+      UiSelectors.taskdescriptioninput.value = "";
     },
     //Get UI Selectors
     getUiSelectors: () => {
@@ -175,6 +206,12 @@ const AppCtrl = ((StorageCtrl, DataCtrl, UICtrl) => {
         newTaskInput.duedate,
         newTaskInput.taskdetails
       );
+
+      //Add Tasks To The UI In Progress Task List
+      UICtrl.addProgressTaskList(newTask);
+
+      //Clear Input Fileds For the Form
+      UICtrl.clearTaskInput();
     }
   };
 

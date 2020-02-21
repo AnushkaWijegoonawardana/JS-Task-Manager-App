@@ -14,3 +14,7 @@ small.lead {
 a:hover {
   text-decoration: none;
 }
+
+#inprogresstaskerros {
+  display: none;
+}

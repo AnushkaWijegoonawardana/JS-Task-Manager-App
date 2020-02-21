@@ -17,27 +17,27 @@ const DataCtrl = (() => {
   //   Data Structure
   const Datastructure = {
     tasklist: [
-      {
-        id: 0,
-        taskname: "UI Design For HSC",
-        duedate: "02/19/2020",
-        taskdetails:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
-      },
-      {
-        id: 1,
-        taskname: "Honest Greens Homepage Development",
-        duedate: "02/18/2020",
-        taskdetails:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
-      },
-      {
-        id: 2,
-        taskname: "Honest Greens Aboutpage Development",
-        duedate: "02/20/2020",
-        taskdetails:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
-      }
+      // {
+      //   id: 0,
+      //   taskname: "UI Design For HSC",
+      //   duedate: "02/19/2020",
+      //   taskdetails:
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
+      // },
+      // {
+      //   id: 1,
+      //   taskname: "Honest Greens Homepage Development",
+      //   duedate: "02/18/2020",
+      //   taskdetails:
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
+      // },
+      // {
+      //   id: 2,
+      //   taskname: "Honest Greens Aboutpage Development",
+      //   duedate: "02/20/2020",
+      //   taskdetails:
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
+      // }
     ],
     currentTask: null,
     totalTasks: 0,
@@ -70,6 +70,18 @@ const DataCtrl = (() => {
 
       return newTask;
     },
+    //Get Total Task Count
+    getTotalTaskCount: () => {
+      let ttotal = 0;
+
+      Datastructure.tasklist.forEach(task => {
+        ttotal += 1;
+      });
+
+      Data.totalTasks = ttotal;
+
+      return Data.totalTasks;
+    },
     logData: () => {
       return Datastructure;
     }
@@ -81,14 +93,16 @@ const DataCtrl = (() => {
 const UICtrl = (() => {
   //  Selecting Elements From The UI
   const UiSelectors = {
-    inprogresstasklist: document.querySelector("#tasklistcontainer"),
+    inprogresstasklist: document.querySelector("#tasklistcontainerinprogress"),
+    inprogresstaskerros: document.querySelector("#inprogresstaskerros"),
     addnewtaskbtn: document.querySelector("#addTaskBtn"),
     updatetaskbtn: document.querySelector("#updateTaskBtn"),
     deletetaskbtn: document.querySelector("#deleteTaskBtn"),
     backbtn: document.querySelector("#backBtn"),
     tasknameinput: document.querySelector("#taskNameInputField"),
     taskduedateinput: document.querySelector("#dueDateInputField"),
-    taskdescriptioninput: document.querySelector("#taskDescriptionInputField")
+    taskdescriptioninput: document.querySelector("#taskDescriptionInputField"),
+    totaltaskcount: document.getElementById("totaltaskcount")
   };
 
   //   Public Methods
@@ -128,6 +142,10 @@ const UICtrl = (() => {
     },
     //Add New Inprogrss Task List To UI
     addProgressTaskList: newTask => {
+      //Show The In Progress Task List
+      UiSelectors.inprogresstasklist.style.display = "block";
+      UiSelectors.inprogresstaskerros.style.display = "none";
+
       const tasklistuiitem = document.createElement("li");
 
       tasklistuiitem.classList =
@@ -157,6 +175,15 @@ const UICtrl = (() => {
       UiSelectors.tasknameinput.value = "";
       UiSelectors.taskduedateinput.value = "";
       UiSelectors.taskdescriptioninput.value = "";
+    },
+    // No inprogress Tasks
+    emptyinporgresstaskslist: () => {
+      UiSelectors.inprogresstaskerros.style.display = "block";
+      UiSelectors.inprogresstasklist.style.display = "none";
+    },
+    //Show Total Task Count
+    showTotalTaskCount: totalTaskscount => {
+      UiSelectors.totaltaskcount.textContent = totalTaskscount;
     },
     //Get UI Selectors
     getUiSelectors: () => {
@@ -210,6 +237,12 @@ const AppCtrl = ((StorageCtrl, DataCtrl, UICtrl) => {
       //Add Tasks To The UI In Progress Task List
       UICtrl.addProgressTaskList(newTask);
 
+      // Get The Total Task List
+      const totalTaskscount = DataCtrl.getTotalTaskCount();
+
+      // Add Total Task Count UI
+      UICtrl.showTotalTaskCount(totalTaskscount);
+
       //Clear Input Fileds For the Form
       UICtrl.clearTaskInput();
     }
@@ -221,8 +254,19 @@ const AppCtrl = ((StorageCtrl, DataCtrl, UICtrl) => {
       //   Fetch Tasks From Data Structure
       const taskListsitems = DataCtrl.getTaskItems();
 
-      //   Populate Task In Progress List
-      UICtrl.populateProgressTaskLsit(taskListsitems);
+      // Check if is there any Tasks
+      if (taskListsitems.length === 0) {
+        UICtrl.emptyinporgresstaskslist();
+      } else {
+        //   Populate Task In Progress List
+        UICtrl.populateProgressTaskLsit(taskListsitems);
+      }
+
+      // Get The Total Task List
+      const totalTaskscount = DataCtrl.getTotalTaskCount();
+
+      // Add Total Task Count UI
+      UICtrl.showTotalTaskCount(totalTaskscount);
 
       // Load Event Listners
       loadingEvents();

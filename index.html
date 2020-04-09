@@ -32,27 +32,9 @@
   </head>
   <body>
     <!-- View Task Modal -->
-    <!-- <div class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title tasknameview">UI Design For HSC</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="taskdetailsview text-dark mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos.</div>
-            <div class="taskduedateview text-dark font-italic">Due On 03/01/2020</div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-block btn-primary" id="updateTaskBtn">
-              <i class="fas fa-edit"></i> Update Task
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> -->
+    <div class="modal" tabindex="-1" role="dialog">
+      
+    </div>
 
     <!-- Header Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -147,14 +129,14 @@
 
           <hr />
 
-          <div class="row mb-2">
+          <div class="row mb-2" id="addstatecontainer">
             <div class="col-md">
               <button class="btn btn-block btn-dark" id="addTaskBtn">
                 <i class="fas fa-plus"></i> Add New Task
               </button>
             </div>
           </div>
-          <div class="row">
+          <div class="row" id="editstatecontainer">
             <div class="col-md mb-2">
               <button class="btn btn-block btn-primary" id="updateTaskBtn">
                 <i class="fas fa-edit"></i> Update Task
@@ -186,7 +168,7 @@
                 ></span
               >
             </li>
-            <li
+            <!-- <li
               class="list-group-item list-group-item-success d-flex justify-content-between align-items-center"
             >
               Completed Tasks
@@ -196,7 +178,7 @@
                 >2</span
               >
             </li>
-            <!-- <li
+            <li
               class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center"
             >
               Over Dued Tasks
@@ -223,9 +205,9 @@
               <div class="alert alert-primary mb-3" id="inprogresstaskerros">
                 Your Task List is Empty
               </div>
-              <div class="card-title">Completed Tasks</div>
+              <!-- <div class="card-title">Completed Tasks</div>
               <ul class="list-group mb-3" id="tasklistcontainercompleted">
-                <!-- <li
+                <li
                   class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center"
                   id="tasklistitem"
                 >
@@ -234,15 +216,15 @@
                       >UI Design For HSC | </span
                     ><sapn class="taskcompleteddate font-italic">Completed On 02/01/2020</sapn></strike>
                   </div>
-                </li> -->
-              </ul>
+                </li>
+              </ul> -->
 
-              <a
+              <!-- <a
                 href="#"
                 class="btn btn-block btn-dark float-right"
                 id="clearAllBtn"
                 ><i class="fas fa-broom"></i> Clear All Tasks</a
-              >
+              > -->
             </div>
           </div>
         </div>

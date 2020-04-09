@@ -7,7 +7,7 @@ const StorageCtrl = (() => {
 // <---------- Data Controller ---------->
 const DataCtrl = (() => {
   //   Data Constructor
-  const Data = function(id, taskname, duedate, taskdetails) {
+  const Data = function (id, taskname, duedate, taskdetails) {
     this.id = id;
     this.taskname = taskname;
     this.duedate = duedate;
@@ -22,28 +22,28 @@ const DataCtrl = (() => {
       //   taskname: "UI Design For HSC",
       //   duedate: "02/19/2020",
       //   taskdetails:
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos.",
       // },
       // {
       //   id: 1,
       //   taskname: "Honest Greens Homepage Development",
       //   duedate: "02/18/2020",
       //   taskdetails:
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos.",
       // },
       // {
       //   id: 2,
       //   taskname: "Honest Greens Aboutpage Development",
       //   duedate: "02/20/2020",
       //   taskdetails:
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos."
-      // }
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam doloribus maxime, quo culpa commodi minima tempore omnis voluptatibus quos.",
+      // },
     ],
     currentTask: null,
     totalTasks: 0,
     totalCompletedTasks: 0,
     totalOverDueTask: 0,
-    deletedTasks: 0
+    deletedTasks: 0,
   };
 
   //   Return Convert Private Data Into The Public Mode
@@ -70,11 +70,21 @@ const DataCtrl = (() => {
 
       return newTask;
     },
+    // Get Task By ID
+    getTaskByID: (progressTaskID) => {
+      let taskfound = null;
+      Datastructure.tasklist.forEach((task) => {
+        if (task.id === progressTaskID) {
+          taskfound = task;
+        }
+      });
+      return taskfound;
+    },
     //Get Total Task Count
     getTotalTaskCount: () => {
       let ttotal = 0;
 
-      Datastructure.tasklist.forEach(task => {
+      Datastructure.tasklist.forEach((task) => {
         ttotal += 1;
       });
 
@@ -82,9 +92,18 @@ const DataCtrl = (() => {
 
       return Data.totalTasks;
     },
+    //Set Current Task
+    setCurrentTask: (task) => {
+      Datastructure.currentTask = task;
+    },
+    //Get Current Task
+    getCurrentTask: () => {
+      return Datastructure.currentTask;
+      // console.log(Datastructure.currentTask);
+    },
     logData: () => {
       return Datastructure;
-    }
+    },
   };
 })();
 // <---------- Data Controller ---------->
@@ -102,16 +121,19 @@ const UICtrl = (() => {
     tasknameinput: document.querySelector("#taskNameInputField"),
     taskduedateinput: document.querySelector("#dueDateInputField"),
     taskdescriptioninput: document.querySelector("#taskDescriptionInputField"),
-    totaltaskcount: document.getElementById("totaltaskcount")
+    totaltaskcount: document.getElementById("totaltaskcount"),
+    edistaecontainer: document.getElementById("editstatecontainer"),
+    addstatecontainer: document.getElementById("addstatecontainer"),
+    vieweventmodal: document.querySelector(".modal"),
   };
 
   //   Public Methods
   return {
     // Populate In Porgress Taks List
-    populateProgressTaskLsit: taskListsitems => {
+    populateProgressTaskLsit: (taskListsitems) => {
       let htmlDom = "";
 
-      taskListsitems.forEach(taskitem => {
+      taskListsitems.forEach((taskitem) => {
         htmlDom += `
         <li id="taskprogress-${taskitem.id}"
         class="list-group-item list-group-item-light d-flex justify-content-between align-items-center"
@@ -137,11 +159,11 @@ const UICtrl = (() => {
       return {
         taskname: UiSelectors.tasknameinput.value,
         duedate: UiSelectors.taskduedateinput.value,
-        taskdetails: UiSelectors.taskdescriptioninput.value
+        taskdetails: UiSelectors.taskdescriptioninput.value,
       };
     },
     //Add New Inprogrss Task List To UI
-    addProgressTaskList: newTask => {
+    addProgressTaskList: (newTask) => {
       //Show The In Progress Task List
       UiSelectors.inprogresstasklist.style.display = "block";
       UiSelectors.inprogresstaskerros.style.display = "none";
@@ -161,7 +183,7 @@ const UICtrl = (() => {
           <a href="#" class="font-weight-bold text-dark text-decoration-none taskitemname">${newTask.taskname}</a> | <sapn class="taskitemduedate font-italic">Due On ${newTask.duedate}</sapn>
         </div>
         <a href="#" class="taskitemedit col-1"
-          ><i class="fas fa-pencil-alt"></i
+          ><i class="taskitemedit fas fa-pencil-alt"></i
         ></a>
       `;
 
@@ -176,19 +198,74 @@ const UICtrl = (() => {
       UiSelectors.taskduedateinput.value = "";
       UiSelectors.taskdescriptioninput.value = "";
     },
+    //Add Task To Modal
+    addTaskToModal: () => {
+      UiSelectors.vieweventmodal.style.display = "block";
+      UiSelectors.vieweventmodal.innerHTML = `
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title tasknameview">${
+              DataCtrl.getCurrentTask().taskname
+            }</h5>
+            <button type="button" class="closeModal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="taskdetailsview text-dark mb-2">${
+              DataCtrl.getCurrentTask().taskdetails
+            }</div>
+            <div class="taskduedateview text-dark font-italic">Due On ${
+              DataCtrl.getCurrentTask().duedate
+            }</div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-block btn-primary updateTaskButton" id="${
+              DataCtrl.getCurrentTask().id
+            }">
+              <i class="fas fa-edit"></i> Update Task
+            </button>
+          </div>
+        </div>
+      </div>
+      `;
+    },
+    //Add Task To Update
+    addTaskToUpdate: () => {
+      UiSelectors.vieweventmodal.style.display = "none";
+      UICtrl.showEditState();
+
+      UiSelectors.tasknameinput.value = DataCtrl.getCurrentTask().taskname;
+      UiSelectors.taskduedateinput.value = DataCtrl.getCurrentTask().duedate;
+      UiSelectors.taskdescriptioninput.value = DataCtrl.getCurrentTask().taskdetails;
+    },
     // No inprogress Tasks
     emptyinporgresstaskslist: () => {
       UiSelectors.inprogresstaskerros.style.display = "block";
       UiSelectors.inprogresstasklist.style.display = "none";
     },
     //Show Total Task Count
-    showTotalTaskCount: totalTaskscount => {
+    showTotalTaskCount: (totalTaskscount) => {
       UiSelectors.totaltaskcount.textContent = totalTaskscount;
+    },
+    //Clear Edit State
+    clearEditState: () => {
+      UICtrl.clearTaskInput();
+      UiSelectors.edistaecontainer.style.display = "none";
+    },
+    showEditState: () => {
+      UiSelectors.edistaecontainer.style.display = "block";
+      UiSelectors.addstatecontainer.style.display = "none";
+    },
+    //Clear View Modal State
+    clearModalState: () => {
+      UiSelectors.vieweventmodal.style.display = "none";
     },
     //Get UI Selectors
     getUiSelectors: () => {
       return UiSelectors;
-    }
+    },
   };
 })();
 // <---------- UI Controller ---------->
@@ -202,10 +279,30 @@ const AppCtrl = ((StorageCtrl, DataCtrl, UICtrl) => {
   const loadingEvents = () => {
     //Add New Task Event
     UISelectors.addnewtaskbtn.addEventListener("click", addNewTaskSubmit);
+
+    // View Icon Click Event Listner
+    UISelectors.inprogresstasklist.addEventListener("click", viewTaskClick);
+
+    //Close View Task Modal
+    UISelectors.vieweventmodal.addEventListener("click", closeViewTaskModal);
+
+    // Update Task Click Event Listner
+    UISelectors.vieweventmodal.addEventListener("click", updateTaskClick);
+
+    //Update Task Event
+    UISelectors.updatetaskbtn.addEventListener("click", taskUpdateSubmit);
+
+    //Disable The Submit on Enter
+    document.addEventListener("keypress", (e) => {
+      if (e.keyCode === 13 || e.which === 13) {
+        e.preventDefault();
+        return false;
+      }
+    });
   };
 
   //   Add New Task Submit
-  const addNewTaskSubmit = e => {
+  const addNewTaskSubmit = (e) => {
     e.preventDefault();
 
     // Get New Task Input Form The UICtrl
@@ -248,9 +345,72 @@ const AppCtrl = ((StorageCtrl, DataCtrl, UICtrl) => {
     }
   };
 
+  // View Task Click
+  const viewTaskClick = (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains("taskitemedit")) {
+      //Get The ID of the task
+      const taskListDomID = e.target.parentNode.parentNode.id;
+
+      //Split the Dom id & get the task id
+      const taskIDArray = taskListDomID.split("-");
+      const progressTaskID = parseInt(taskIDArray[1]);
+
+      const inprogressTasktoView = DataCtrl.getTaskByID(progressTaskID);
+
+      //Set as Current Task
+      DataCtrl.setCurrentTask(inprogressTasktoView);
+
+      // Add Task To Modal
+      UICtrl.addTaskToModal();
+    }
+  };
+
+  //Close View Task Modal
+  const closeViewTaskModal = (e) => {
+    e.preventDefault();
+
+    if (e.target.classList.contains("closeModal")) {
+      UICtrl.clearModalState();
+    }
+  };
+
+  //Update Task Click
+  const updateTaskClick = (e) => {
+    e.preventDefault();
+
+    if (e.target.classList.contains("updateTaskButton")) {
+      const taskID = e.target.id;
+      // console.log(taskID);
+
+      const inprogressTaskToUpdate = DataCtrl.getCurrentTask(taskID);
+
+      //Set as Current Task
+      DataCtrl.setCurrentTask(inprogressTaskToUpdate);
+
+      UICtrl.addTaskToUpdate();
+    }
+  };
+
+  // Task Update Submit Click
+  const taskUpdateSubmit = (e) => {
+    e.preventDefault();
+
+    //Get Task Input
+    const taskUpdateInput = UICtrl.getNewTaskInput();
+
+    //Update New Task
+    const updateTask = DataCtrl.
+    console.log(taskUpdateInput);
+  };
+
   // Public Methods
   return {
     init: () => {
+      //Clear Edit State
+      UICtrl.clearEditState();
+      UICtrl.clearModalState();
+
       //   Fetch Tasks From Data Structure
       const taskListsitems = DataCtrl.getTaskItems();
 
@@ -270,7 +430,7 @@ const AppCtrl = ((StorageCtrl, DataCtrl, UICtrl) => {
 
       // Load Event Listners
       loadingEvents();
-    }
+    },
   };
 })(StorageCtrl, DataCtrl, UICtrl);
 // <---------- AppF Controller ---------->

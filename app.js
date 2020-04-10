@@ -400,7 +400,11 @@ const AppCtrl = ((StorageCtrl, DataCtrl, UICtrl) => {
     const taskUpdateInput = UICtrl.getNewTaskInput();
 
     //Update New Task
-    const updateTask = DataCtrl.
+    const updateTaskDetails = DataCtrl.updateTask(
+      taskUpdateInput.taskname,
+      taskUpdateInput.duedate,
+      taskUpdateInput.taskdetails
+    );
     console.log(taskUpdateInput);
   };
 

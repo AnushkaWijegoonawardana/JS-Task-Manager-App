@@ -1,174 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Page Title Details -->
-    <title>Task Manager</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<head>
+		<!-- Page Title Details -->
+		<title>Task Manager</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-    <!-- Page Meta Data Details -->
-    <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Task Manager App Using JavaScript Module Pattern."
-    />
-    <meta name="keywords" content="Html, Bootstrap, CSS, JavaScript" />
-    <meta name="author" content="Anushka Wijegoonawardana" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Page Meta Data Details -->
+		<meta charset="UTF-8" />
+		<meta
+			name="description"
+			content="Task Manager App Using JavaScript Module Pattern."
+		/>
+		<meta name="keywords" content="Html, Bootstrap, CSS, JavaScript" />
+		<meta name="author" content="Anushka Wijegoonawardana" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- CSS Style Files -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="main.css" />
+		<!-- CSS Style Files -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="main.css" />
 
-    <!-- Scripting Files -->
-    <script
-      src="https://kit.fontawesome.com/b27501a5af.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <!-- View Task Modal -->
-    <div class="modal" tabindex="-1" role="dialog">
-      
-    </div>
+		<!-- Scripting Files -->
+		<script
+			src="https://kit.fontawesome.com/b27501a5af.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<!-- View Task Modal -->
+		<div class="modal" tabindex="-1" role="dialog"></div>
 
-    <!-- Header Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="index.html"
-          >Taks Manager | <small class="lead">Organize your Tasks</small></a
-        >
-      </div>
-    </nav>
+		<!-- Header Navigation -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand" href="index.html"
+					>Taks Manager | <small class="lead">Organize your Tasks</small></a
+				>
+			</div>
+		</nav>
 
-    <!-- Body Container -->
-    <div class="container my-5">
-      <!-- Task Input Form -->
-      <div class="card mb-5">
-        <h5 class="card-header">Task Manager</h5>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-3 text-muted">
-            Add Your Daily Tasks & Golas Here
-          </h6>
-          <form>
-            <div class="row">
-              <div class="col-md">
-                <div class="form-group">
-                  <label for="taskNameInputField">Task Name</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        ><i class="fas fa-tasks"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="taskNameInputField"
-                      placeholder="Add Task Name"
-                    />
-                    <div class="invalid-feedback">
-                      Please add new task name
-                    </div>
-                    <div class="valid-feedback">
-                      Looking Good
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md">
-                <div class="form-group">
-                  <label for="dueDateInputField">Due Date</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        ><i class="fas fa-calendar-check"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="dueDateInputField"
-                    />
-                    <div class="invalid-feedback">
-                      Please choose a username.
-                    </div>
-                    <div class="valid-feedback">
-                      Please choose a username.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md">
-                <div class="form-group">
-                  <label for="taskDescriptionInputField"
-                    >Task Description</label
-                  >
-                  <textarea
-                    class="form-control"
-                    id="taskDescriptionInputField"
-                    placeholder="Add Task Description"
-                    rows="3"
-                  ></textarea>
-                  <div class="invalid-feedback">
-                    Please choose a username.
-                  </div>
-                  <div class="valid-feedback">
-                    Please choose a username.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+		<!-- Body Container -->
+		<div class="container my-5" id="bodyContainer">
+			<!-- Task Input Form -->
+			<div class="card mb-5">
+				<h5 class="card-header">Task Manager</h5>
+				<div class="card-body">
+					<h6 class="card-subtitle mb-3 text-muted">
+						Add Your Daily Tasks & Golas Here
+					</h6>
+					<form>
+						<div class="row">
+							<div class="col-md">
+								<div class="form-group">
+									<label for="taskNameInputField">Task Name</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"
+												><i class="fas fa-tasks"></i
+											></span>
+										</div>
+										<input
+											type="text"
+											class="form-control"
+											id="taskNameInputField"
+											placeholder="Add Task Name"
+										/>
+										<div class="invalid-feedback">
+											Please add new task name
+										</div>
+										<div class="valid-feedback">
+											Looking Good
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md">
+								<div class="form-group">
+									<label for="dueDateInputField">Due Date</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"
+												><i class="fas fa-calendar-check"></i
+											></span>
+										</div>
+										<input
+											type="date"
+											class="form-control"
+											id="dueDateInputField"
+										/>
+										<div class="invalid-feedback">
+											Please choose a username.
+										</div>
+										<div class="valid-feedback">
+											Please choose a username.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md">
+								<div class="form-group">
+									<label for="taskDescriptionInputField"
+										>Task Description</label
+									>
+									<textarea
+										class="form-control"
+										id="taskDescriptionInputField"
+										placeholder="Add Task Description"
+										rows="3"
+									></textarea>
+									<div class="invalid-feedback">
+										Please choose a username.
+									</div>
+									<div class="valid-feedback">
+										Please choose a username.
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
 
-          <hr />
+					<hr />
 
-          <div class="row mb-2" id="addstatecontainer">
-            <div class="col-md">
-              <button class="btn btn-block btn-dark" id="addTaskBtn">
-                <i class="fas fa-plus"></i> Add New Task
-              </button>
-            </div>
-          </div>
-          <div class="row" id="editstatecontainer">
-            <div class="col-md mb-2">
-              <button class="btn btn-block btn-primary" id="updateTaskBtn">
-                <i class="fas fa-edit"></i> Update Task
-              </button>
-            </div>
-            <div class="col-md mb-2">
-              <button class="btn btn-block btn-danger" id="deleteTaskBtn">
-                <i class="fas fa-trash-alt"></i> Delete Task
-              </button>
-            </div>
-            <div class="col-md mb-2">
-              <button class="btn btn-block btn-success" id="backBtn">
-                <i class="fas fa-hand-point-left"></i> Go Back
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+					<div class="row mb-2" id="addstatecontainer">
+						<div class="col-md">
+							<button class="btn btn-block btn-dark" id="addTaskBtn">
+								<i class="fas fa-plus"></i> Add New Task
+							</button>
+						</div>
+					</div>
+					<div class="row" id="editstatecontainer">
+						<div class="col-md mb-2">
+							<button class="btn btn-block btn-primary" id="updateTaskBtn">
+								<i class="fas fa-edit"></i> Update Task
+							</button>
+						</div>
+						<div class="col-md mb-2">
+							<button class="btn btn-block btn-danger" id="deleteTaskBtn">
+								<i class="fas fa-trash-alt"></i> Delete Task
+							</button>
+						</div>
+						<div class="col-md mb-2">
+							<button class="btn btn-block btn-success" id="backBtn">
+								<i class="fas fa-hand-point-left"></i> Go Back
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      <!-- Task Display Container -->
-      <div class="row">
-        <div class="col-md-3 mb-3">
-          <ul class="list-group">
-            <li
-              class="list-group-item list-group-item-primary d-flex justify-content-between align-items-center"
-            >
-              Total Tasks
-              <span class="badge badge-primary badge-pill" id="totaltaskcount"
-                ></span
-              >
-            </li>
-            <!-- <li
+			<!-- Task Display Container -->
+			<div class="row">
+				<div class="col-md-3 mb-3">
+					<ul class="list-group">
+						<li
+							class="list-group-item list-group-item-primary d-flex justify-content-between align-items-center"
+						>
+							Total Tasks
+							<span
+								class="badge badge-primary badge-pill"
+								id="totaltaskcount"
+							></span>
+						</li>
+						<!-- <li
               class="list-group-item list-group-item-success d-flex justify-content-between align-items-center"
             >
               Completed Tasks
@@ -194,18 +193,18 @@
                 >5</span
               >
             </li> -->
-          </ul>
-        </div>
-        <div class="col-md-9">
-          <div class="card ">
-            <h6 class="card-header">Task List</h6>
-            <div class="card-body">
-              <div class="card-title">Tasks In Progress</div>
-              <ul class="list-group mb-3" id="tasklistcontainerinprogress"></ul>
-              <div class="alert alert-primary mb-3" id="inprogresstaskerros">
-                Your Task List is Empty
-              </div>
-              <!-- <div class="card-title">Completed Tasks</div>
+					</ul>
+				</div>
+				<div class="col-md-9">
+					<div class="card">
+						<h6 class="card-header">Task List</h6>
+						<div class="card-body">
+							<div class="card-title">Tasks In Progress</div>
+							<ul class="list-group mb-3" id="tasklistcontainerinprogress"></ul>
+							<div class="alert alert-primary mb-3" id="inprogresstaskerros">
+								Your Task List is Empty
+							</div>
+							<!-- <div class="card-title">Completed Tasks</div>
               <ul class="list-group mb-3" id="tasklistcontainercompleted">
                 <li
                   class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center"
@@ -219,31 +218,31 @@
                 </li>
               </ul> -->
 
-              <!-- <a
+							<!-- <a
                 href="#"
                 class="btn btn-block btn-dark float-right"
                 id="clearAllBtn"
                 ><i class="fas fa-broom"></i> Clear All Tasks</a
               > -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <!-- Footer Content -->
-    <footer class="bg-dark text-light py-3">
-      <div class="container text-center">
-        <p class="lead mb-0">
-          <span class="font-weight-bold">Design & Developed By</span>
-          <a href="#" class="link-text text-light font-italic"
-            >Anushka Wijegoonawardana</a
-          >
-        </p>
-      </div>
-    </footer>
+		<!-- Footer Content -->
+		<footer class="bg-dark text-light py-3">
+			<div class="container text-center">
+				<p class="lead mb-0">
+					<span class="font-weight-bold">Design & Developed By</span>
+					<a href="#" class="link-text text-light font-italic"
+						>Anushka Wijegoonawardana</a
+					>
+				</p>
+			</div>
+		</footer>
 
-    <!-- Body Scripting Files -->
-    <script src="app.js"></script>
-  </body>
+		<!-- Body Scripting Files -->
+		<script src="app.js"></script>
+	</body>
 </html>

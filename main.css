@@ -1,20 +1,28 @@
 small.lead {
-  font-size: 1rem;
+	font-size: 1rem;
 }
 
 .modal {
-  display: block;
-  background-color: rgba(0, 0, 0, 0.8);
+	display: block;
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-dialog {
-  margin-top: 10rem;
+	margin-top: 10rem;
 }
 
 a:hover {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 #inprogresstaskerros {
-  display: none;
+	display: none;
+}
+
+body {
+	min-height: 100vh !important;
+}
+
+#bodyContainer {
+	min-height: calc(100vh - 200px);
 }
